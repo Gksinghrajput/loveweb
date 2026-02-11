@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>💖 Valentine's Surprise</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #fff;
+    }
+
+    /* FLOATING HEARTS (GLOBAL) */
+    .float {
+      position: fixed;
+      top: -50px;
+      font-size: 20px;
+      animation: fall linear infinite;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.85;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-50px) translateX(0) rotate(0deg); }
+      100% { transform: translateY(110vh) translateX(100px) rotate(360deg); }
+    }
+
+    /* FLOATS INSIDE GALLERY */
+    .gallery-float {
+      position: absolute;
+      top: -40px;
+      font-size: 18px;
+      animation: galleryFall linear infinite;
+      pointer-events: none;
+      opacity: 0.9;
+      z-index: 1;
+    }
+
+    @keyframes galleryFall {
+      to {
+        transform: translateY(110%) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* MUSIC BUTTON */
+    .music-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: rgba(255,255,255,0.25);
+      border: 2px solid rgba(255,255,255,0.5);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      transition: 0.3s;
+    }
+    .music-btn:hover { transform: scale(1.1); }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      text-shadow: 0 0 15px rgba(255,255,255,0.6);
+      margin-bottom: 15px;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff, 0 0 20px #ff6f91; }
+      to   { text-shadow: 0 0 20px #fff, 0 0 40px #ff3d68; }
+    }
+
+    .hero p {
+      max-width: 500px;
+      font-size: 1.1rem;
+      opacity: 0.95;
+      margin-bottom: 25px;
+    }
+
+    .scroll-down {
+      position: absolute;
+      bottom: 30px;
+      font-size: 28px;
+      animation: bounce 2s infinite;
+      cursor: pointer;
+      opacity: 0.9;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
+
+    /* NAME MODAL */
+    .name-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .name-box {
+      background: linear-gradient(135deg, #ffb3c6, #ffe4ec);
+      color: #b3003b;
+      padding: 30px 25px;
+      border-radius: 20px;
+      width: min(90%, 380px);
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+      animation: pop 0.5s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.7); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .name-box h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .name-box input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      margin: 12px 0 16px;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .name-box button {
+      background: #ff3d68;
+      border: none;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 8px 20px rgba(255,61,104,0.4);
+    }
+
+    .name-box button:hover {
+      transform: scale(1.05);
+      background: #ff1f54;
+    }
+
+    /* SECTION */
+    .section {
+      padding: 80px 20px;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* LOVE LETTER */
+    .letter-card {
+      background: linear-gradient(135deg, #fff6fa, #ffe4ec);
+      color: #b3003b;
+      max-width: 720px;
+      width: 100%;
+      padding: 35px 30px;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: 0.8s ease;
+    }
+
+    .letter-card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .letter-card h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.6rem;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ff3d68;
+    }
+
+    .letter-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      min-height: 160px;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      background: #ff3d68;
+      margin-left: 2px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    /* SLIDER SECTION */
+    .slider-section {
+      padding: 80px 0;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .slider-section h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8rem;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px rgba(255,255,255,0.6);
+    }
+
+    .slider-container {
+      position: relative;
+      width: 90%;
+      max-width: 1000px;
+      height: 70vh;
+      margin: auto;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      backdrop-filter: blur(6px);
+    }
+
+    .slides {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.7s ease-in-out;
+      position: relative;
+      z-index: 2;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+    }
+
+    .slide img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.4s ease;
+    }
+
+    /* SLIDER BUTTONS */
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.35);
+      border: none;
+      font-size: 26px;
+      padding: 8px 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      backdrop-filter: blur(6px);
+      transition: 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255,255,255,0.6);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .prev { left: 15px; }
+    .next { right: 15px; }
+
+    /* DOTS */
+    .dots {
+      position: absolute;
+      bottom: 15px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .dot.active {
+      background: #fff;
+      transform: scale(1.3);
+    }
+
+    /* ROTATE BUTTON */
+    .rotate-btn {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.65);
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.4);
+      font-size: 20px;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      transition: 0.3s;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rotate-btn:hover {
+      transform: scale(1.15) rotate(20deg);
+      background: rgba(0,0,0,0.85);
+    }
+
+    /* COUNTDOWN */
+    .countdown-section {
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .countdown-section h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8rem;
+      margin-bottom: 25px;
+      text-shadow: 0 0 10px rgba(255,255,255,0.6);
+    }
+
+    .timer {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .time-box {
+      background: rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 15px 18px;
+      min-width: 80px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+
+    .time-box span {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .time-box small {
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      opacity: 0.9;
+    }
+
+    .countdown-message {
+      margin-top: 25px;
+      font-size: 1.2rem;
+      font-weight: 500;
+      display: none;
+    }
+
+    /* SURPRISE BUTTON */
+    .surprise-section {
+      padding: 80px 20px 120px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .surprise-btn {
+      background: linear-gradient(135deg, #ff3d68, #ff85a2);
+      border: none;
+      color: #fff;
+      padding: 15px 32px;
+      border-radius: 999px;
+      font-size: 1.15rem;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(255,61,104,0.6);
+      animation: glowBtn 1.5s infinite alternate;
+      transition: 0.3s;
+    }
+
+    @keyframes glowBtn {
+      from { box-shadow: 0 0 15px rgba(255,61,104,0.5); }
+      to   { box-shadow: 0 0 30px rgba(255,61,104,0.9); }
+    }
+
+    .surprise-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* SURPRISE OVERLAY */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,154,158,0.96), rgba(250,208,196,0.96));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      z-index: 3000;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.6s ease;
+      padding: 20px;
+    }
+
+    .overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .overlay h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.6rem, 7vw, 4.2rem);
+      margin-bottom: 15px;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(255,255,255,0.6);
+      animation: popText 0.6s ease;
+    }
+
+    @keyframes popText {
+      from { transform: scale(0.7); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .overlay p {
+      max-width: 650px;
+      font-size: 1.15rem;
+      margin-bottom: 25px;
+      opacity: 0.95;
+    }
+
+    .proposal-buttons {
+      display: flex;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .yes-btn, .no-btn {
+      border: none;
+      padding: 12px 26px;
+      border-radius: 999px;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    .yes-btn {
+      background: linear-gradient(135deg, #ff3d68, #ff85a2);
+      color: #fff;
+    }
+
+    .yes-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(255,61,104,0.9);
+    }
+
+    .no-btn {
+      background: rgba(255,255,255,0.85);
+      color: #ff3d68;
+      position: relative;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .letter-card { padding: 25px 20px; }
+      .slider-container { height: 60vh; }
+      .slider-section h2,
+      .countdown-section h2 { font-size: 2.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAME INPUT MODAL -->
+  <div class="name-modal" id="nameModal">
+    <div class="name-box">
+      <h2>💖 What's your name?</h2>
+      <p>So I can make this special just for you</p>
+      <input type="text" id="nameInput" placeholder="Enter your name..." />
+      <button id="startBtn">Start 💌</button>
+    </div>
+  </div>
+
+  <!-- MUSIC BUTTON -->
+  <button class="music-btn" id="musicBtn">🎵</button>
+  <audio id="bgMusic" loop>
+    <!-- 🎵 ADD YOUR MUSIC FILE HERE -->
+    <!-- Example: <source src="music.mp3" type="audio/mpeg"> -->
+  </audio>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="hero">
+    <h1 id="heroGreeting">Dear Love 💕</h1>
+    <p>A little surprise made with all my heart, just for you.</p>
+    <div class="scroll-down" onclick="document.getElementById('letter').scrollIntoView({behavior:'smooth'})">⬇️</div>
+  </section>
+
+  <!-- LOVE LETTER -->
+  <section class="section" id="letter">
+    <div class="letter-card" id="letterCard">
+      <h2>My Love Letter 💌</h2>
+      <div class="letter-text" id="letterText"></div><span class="cursor" id="cursor"></span>
+    </div>
+  </section>
+
+  <!-- IMAGE SLIDER -->
+  <section class="slider-section" id="gallery">
+    <h2>Our Memories 📸</h2>
+    <div class="slider-container" id="sliderContainer">
+
+      <button class="nav-btn prev" id="prevBtn">❮</button>
+      <button class="nav-btn next" id="nextBtn">❯</button>
+
+      <div class="slides" id="slides">
+
+        <!-- 🖼️ SLIDE 1 -->
+        <div class="slide">
+          <img src="jdfjkdjfk.jpeg" alt="">
+          <button class="rotate-btn">🔄</button>
+        </div>
+
+        <!-- 🖼️ SLIDE 2 -->
+        <div class="slide">
+          <img src="jfdkjfdkjdskjfk.jpeg" alt="">
+          <button class="rotate-btn">🔄</button>
+        </div>
+
+        <!-- 🖼️ SLIDE 3 -->
+        <div class="slide">
+          <img src="jfkdjfksd.jpeg" alt="">
+          <button class="rotate-btn">🔄</button>
+        </div>
+
+        <!-- 🖼️ SLIDE 4 -->
+        <div class="slide">
+          <img src="df.jpeg" alt="">
+          <button class="rotate-btn">🔄</button>
+        </div>
+
+        <!-- 🖼️ SLIDE 5 -->
+        <div class="slide">
+          <img src="kdjfkjd.jpeg" alt="">
+          <button class="rotate-btn">🔄</button>
+        </div>
+
+        <!-- 🖼️ SLIDE 6 -->
+        <div class="slide">
+          <img src="WhatsApp Image 2026.jpeg" alt="">
+          <button class="rotate-btn">🔄</button>
+        </div>
+
+        <!-- 🖼️ SLIDE 7 -->
+        <div class="slide">
+          <img src="WhatsApp Image 2026-02-11 at 3.jpeg" alt="">
+          <button class="rotate-btn">🔄</button>
+        </div>
+
+        <!-- 🖼️ SLIDE 8 -->
+        <div class="slide">
+          <img src="WhatsApp Image 2026-02-11 at 3.08.12 PM.jpeg" alt="">
+          <button class="rotate-btn">🔄</button>
+        </div>
+
+        <!-- 🖼️ SLIDE 9 -->
+        <div class="slide">
+          <img src="WhatsApp Image 2026-02-11 at 3.08.08 PM.jpeg" alt="">
+          <button class="rotate-btn">🔄</button>
+        </div>
+
+        <!-- 🖼️ SLIDE 10 -->
+        <div class="slide">
+          <img src="WhatsApp Image 2026-02-11 at 3.08.07 PM.jpeg" alt="">
+          <button class="rotate-btn">🔄</button>
+        </div>
+
+        <!-- 🖼️ SLIDE 11 -->
+        <div class="slide">
+          <img src="WhatsApp Image 2026-02-11 at 3.08.05 PM.jpeg" alt="">
+          <button class="rotate-btn">🔄</button>
+        </div>
+
+        <!-- 🖼️ SLIDE 12 -->
+        <div class="slide">
+          <img src="WhatsApp Image 2026-02-11 at 3.08.04 PM.jpeg" alt="">
+          <button class="rotate-btn">🔄</button>
+        </div>
+
+        <!-- 🖼️ SLIDE 13 -->
+        <div class="slide">
+          <img src="WhatsApp Image 2026-02-11 at 3.08.03 PM.jpeg" alt="">
+          <button class="rotate-btn">🔄</button>
+        </div>
+
+        <!-- 🖼️ SLIDE 14 -->
+        <div class="slide">
+          <img src="WhatsApp Image .jpeg" alt="">
+          <button class="rotate-btn">🔄</button>
+        </div>
+
+        <!-- 🖼️ SLIDE 15 -->
+        <div class="slide">
+          <img src="fdfd.jpeg" alt="">
+          <button class="rotate-btn">🔄</button>
+        </div>
+
+        <!-- 🖼️ SLIDE 16 -->
+        <div class="slide">
+          <img src="dfjfkdf.jpeg" alt="">
+          <button class="rotate-btn">🔄</button>
+        </div>
+
+        <!-- 🖼️ SLIDE 17 -->
+        <div class="slide">
+          <img src="djfkdjfdsjk.jpeg" alt="">
+          <button class="rotate-btn">🔄</button>
+        </div>
+
+      </div>
+
+      <!-- DOTS -->
+      <div class="dots" id="dots"></div>
+
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="countdown-section" id="countdown">
+    <h2>Counting Down to Valentine’s 💘</h2>
+    <div class="timer">
+      <div class="time-box"><span id="days">00</span><small>Days</small></div>
+      <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
+      <div class="time-box"><span id="minutes">00</span><small>Minutes</small></div>
+      <div class="time-box"><span id="seconds">00</span><small>Seconds</small></div>
+    </div>
+    <div class="countdown-message" id="countdownMessage">💖 Happy Valentine’s Day! 💖</div>
+  </section>
+
+  <!-- SURPRISE -->
+  <section class="surprise-section" id="surprise">
+    <button class="surprise-btn" id="surpriseBtn">💖 I Have a Question...</button>
+  </section>
+
+  <!-- SURPRISE OVERLAY -->
+  <div class="overlay" id="overlay">
+    <h1 id="overlayTitle">Will You Be My Valentine? 💍💖</h1>
+    <p id="overlayText">
+      From the moment you came into my life, everything became brighter, warmer,
+      and more beautiful. I can’t imagine my days without your smile, your laugh,
+      and your love. So today, and every day after, I just want to ask you one thing…
+    </p>
+
+    <div class="proposal-buttons">
+      <button class="yes-btn" id="yesBtn">YES 💖</button>
+      <button class="no-btn" id="noBtn">NO 🙈</button>
+    </div>
+  </div>
+
+  <script>
+    /* FLOATING HEARTS (GLOBAL BACKGROUND) */
+    const symbols = ["💖","💕","💗","🌹","🌸","💘"];
+    function createFloat() {
+      const span = document.createElement("span");
+      span.className = "float";
+      span.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+      span.style.left = Math.random() * 100 + "vw";
+      span.style.fontSize = 14 + Math.random() * 22 + "px";
+      span.style.animationDuration = 6 + Math.random() * 6 + "s";
+      document.body.appendChild(span);
+      setTimeout(() => span.remove(), 12000);
+    }
+    setInterval(createFloat, 350);
+
+    /* ============================
+       NAME VALIDATION
+    ============================ */
+    const nameModal = document.getElementById("nameModal");
+    const startBtn = document.getElementById("startBtn");
+    const nameInput = document.getElementById("nameInput");
+    const heroGreeting = document.getElementById("heroGreeting");
+    const overlayTitle = document.getElementById("overlayTitle");
+
+    let userName = "Love";
+    const correctName = "nisha rani";
+
+    startBtn.addEventListener("click", () => {
+      const val = nameInput.value.trim().toLowerCase();
+      if (!val) return;
+
+      if (val !== correctName) {
+        alert("Enter your right name baby 💕");
+        nameInput.value = "";
+        nameInput.focus();
+        return;
+      }
+
+      userName = "Nisha Rani";
+      heroGreeting.textContent = `Dear ${userName} 💕`;
+      overlayTitle.textContent = `${userName}, Will You Be My Valentine? 💍💖`;
+      nameModal.style.display = "none";
+    });
+
+    nameInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") startBtn.click();
+    });
+
+    /* MUSIC TOGGLE */
+    const musicBtn = document.getElementById("musicBtn");
+    const bgMusic = document.getElementById("bgMusic");
+    let musicPlaying = false;
+
+    musicBtn.addEventListener("click", () => {
+      if (!musicPlaying) {
+        bgMusic.play();
+        musicBtn.textContent = "⏸️";
+      } else {
+        bgMusic.pause();
+        musicBtn.textContent = "🎵";
+      }
+      musicPlaying = !musicPlaying;
+    });
+
+    /* TYPEWRITER LOVE LETTER */
+    const letterCard = document.getElementById("letterCard");
+    const letterTextEl = document.getElementById("letterText");
+    const cursor = document.getElementById("cursor");
+
+    function getLetterText() {
+      return `My Dearest ${userName},
+
+You are the best part of my every day. Your smile melts my worries, your voice calms my heart, and your presence makes everything feel right.
+
+With you, even the simplest moments feel magical. I am grateful for every laugh we share, every memory we create, and every dream we build together.
+
+No matter what life brings, I promise to stand beside you, support you, and love you more deeply with every passing day.
+
+Forever yours,
+❤️`;
+    }
+
+    let typingStarted = false;
+
+    function startTyping() {
+      if (typingStarted) return;
+      typingStarted = true;
+      const text = getLetterText();
+      let i = 0;
+      const speed = 40;
+
+      function type() {
+        if (i < text.length) {
+          letterTextEl.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        } else {
+          cursor.style.display = "none";
+        }
+      }
+      type();
+    }
+
+    /* SCROLL REVEAL */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          startTyping();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(letterCard);
+
+    /* COUNTDOWN TIMER */
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+    const countdownMessage = document.getElementById("countdownMessage");
+
+    function getNextValentine() {
+      const now = new Date();
+      let year = now.getFullYear();
+      const valentines = new Date(year, 1, 14, 0, 0, 0);
+      if (now > valentines) year++;
+      return new Date(year, 1, 14, 0, 0, 0);
+    }
+
+    const targetDate = getNextValentine();
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        daysEl.textContent = "00";
+        hoursEl.textContent = "00";
+        minutesEl.textContent = "00";
+        secondsEl.textContent = "00";
+        countdownMessage.style.display = "block";
+        return;
+      }
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+
+      daysEl.textContent = String(d).padStart(2, "0");
+      hoursEl.textContent = String(h).padStart(2, "0");
+      minutesEl.textContent = String(m).padStart(2, "0");
+      secondsEl.textContent = String(s).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    /* SURPRISE OVERLAY */
+    const surpriseBtn = document.getElementById("surpriseBtn");
+    const overlay = document.getElementById("overlay");
+
+    surpriseBtn.addEventListener("click", () => {
+      overlay.classList.add("show");
+      burstHearts();
+    });
+
+    /* YES / NO BUTTON LOGIC */
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+
+    yesBtn.addEventListener("click", () => {
+      overlay.innerHTML = `
+        <h1>YAYYY!! 😍💖</h1>
+        <p>You just made me the happiest person alive 🥰<br>
+        I promise to love you forever, ${userName} ❤️</p>
+        <button class="yes-btn" onclick="closeOverlay()">Aww ❤️</button>
+      `;
+      burstHearts();
+    });
+
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * 70;
+      const y = Math.random() * 60;
+      noBtn.style.position = "absolute";
+      noBtn.style.left = x + "%";
+      noBtn.style.top = y + "%";
+    });
+
+    function closeOverlay() {
+      overlay.classList.remove("show");
+    }
+
+    /* HEART BURST EFFECT */
+    function burstHearts() {
+      for (let i = 0; i < 45; i++) {
+        const span = document.createElement("span");
+        span.className = "float";
+        span.innerText = "💖";
+        span.style.left = 50 + Math.random() * 20 - 10 + "vw";
+        span.style.top = "50vh";
+        span.style.fontSize = 18 + Math.random() * 22 + "px";
+        span.style.animationDuration = 3 + Math.random() * 3 + "s";
+        document.body.appendChild(span);
+        setTimeout(() => span.remove(), 6000);
+      }
+    }
+
+    /* ============================
+       IMAGE SLIDER LOGIC (NO AUTO)
+    ============================ */
+    const slidesContainer = document.getElementById("slides");
+    const slides = document.querySelectorAll(".slide");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const dotsContainer = document.getElementById("dots");
+
+    let currentIndex = 0;
+
+    // Create dots
+    slides.forEach((_, i) => {
+      const dot = document.createElement("div");
+      dot.className = "dot";
+      if (i === 0) dot.classList.add("active");
+      dot.addEventListener("click", () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll(".dot");
+
+    function updateSlider() {
+      slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle("active", i === currentIndex));
+    }
+
+    function goToSlide(index) {
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
+      currentIndex = index;
+      updateSlider();
+    }
+
+    prevBtn.addEventListener("click", () => goToSlide(currentIndex - 1));
+    nextBtn.addEventListener("click", () => goToSlide(currentIndex + 1));
+
+    // Swipe support (mobile)
+    let startX = 0;
+    slidesContainer.addEventListener("touchstart", e => {
+      startX = e.touches[0].clientX;
+    });
+    slidesContainer.addEventListener("touchend", e => {
+      const endX = e.changedTouches[0].clientX;
+      if (startX - endX > 50) goToSlide(currentIndex + 1);
+      if (endX - startX > 50) goToSlide(currentIndex - 1);
+    });
+
+    /* ROTATE IMAGE BUTTON (MANUAL ONLY) */
+    document.querySelectorAll(".rotate-btn").forEach(btn => {
+      let angle = 0;
+      btn.addEventListener("click", () => {
+        const img = btn.parentElement.querySelector("img");
+        angle = (angle + 90) % 360;
+        img.style.transform = `rotate(${angle}deg)`;
+      });
+    });
+
+    /* HEARTS + KISSES RAIN IN GALLERY */
+    const sliderContainer = document.getElementById("sliderContainer");
+    const gallerySymbols = ["💖", "💘", "💋", "🌹"];
+
+    function createGalleryFloat() {
+      const span = document.createElement("span");
+      span.className = "gallery-float";
+      span.innerText = gallerySymbols[Math.floor(Math.random() * gallerySymbols.length)];
+      span.style.left = Math.random() * 100 + "%";
+      span.style.fontSize = 14 + Math.random() * 20 + "px";
+      span.style.animationDuration = 4 + Math.random() * 4 + "s";
+      sliderContainer.appendChild(span);
+      setTimeout(() => span.remove(), 8000);
+    }
+
+    setInterval(createGalleryFloat, 450);
+  </script>
+</body>
+</html>
